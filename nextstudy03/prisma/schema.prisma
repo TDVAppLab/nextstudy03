@@ -9,3 +9,12 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+
+model tlestring {
+  noradcatid        Int     @id
+  objectname     String
+  line1     String
+  line2     String
+  latest_update_datetime   DateTime?
+}
