@@ -1,23 +1,13 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import agent from '@/app/agent';
-import { PrismaClient, tlestring } from '@prisma/client';
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { tlestring } from "@prisma/client";
+import agent from "./agent";
+import prisma from "./prisma";
 
-const prisma = new PrismaClient();
+export default async function GetDataFromNORADServer(): Promise<void>{
 
-type Data = {
-  name: string
-}
+    
+    const objectnames = await agent.NORADServerAccess.activesat2leobjectnamesjson();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-
-
-    const objectnames = await agent.Xtest.objectnames();
-
-    const rawstring = await agent.Xtest.activesat2lestringsraw();
+    const rawstring = await agent.NORADServerAccess.activesat2lestringsraw();
     const lines = rawstring.split('\r\n');
 
 
@@ -40,5 +30,4 @@ export default async function handler(
         });
     }
 
-    res.status(200).json({ name: 'John Doe' })
 }

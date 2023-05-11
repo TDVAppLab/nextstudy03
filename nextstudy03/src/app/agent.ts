@@ -30,22 +30,15 @@ const requests = {
     del: <T>(url:string) => axios.delete<T>(url).then(responseBody),
 }
 
-
-
-
-
-
-const Xtest = {
-    list: () => requests.get<SatelliteOrbitalElement[]>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json'),
-    list2: () => requests.get<any>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le'),
-    objectnames: () => requests.get<SatelliteOrbitalElement[]>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json'),
+const NORADServerAccess = {
+    activesat2leobjectnamesjson: () => requests.get<SatelliteOrbitalElement[]>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json'),
     activesat2lestringsraw: () => requests.get<string>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le'),
 }
 
 
 
 const agent = {
-    Xtest,
+    NORADServerAccess,
 }
 
 export default agent;
