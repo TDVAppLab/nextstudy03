@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient, tlestring } from '@prisma/client'
+import { tlestring } from '@prisma/client'
+import prisma from '@/app/prisma'
 
-const prisma = new PrismaClient()
 
 export default function handler(
   req: NextApiRequest,
