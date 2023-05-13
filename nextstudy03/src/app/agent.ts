@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ObjectNameDtO } from "./models/ObjectNameDtO";
 import { SatelliteOrbitalElement } from "./models/SatelliteOrbitalElement";
+import { tlestring } from "@prisma/client";
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
@@ -36,9 +37,16 @@ const NORADServerAccess = {
 }
 
 
+const SatelliteOrbitalElements = {
+    list:() => requests.get<tlestring[]>(`/satelliteorbitalelement/index`),
+    details:(title:string) => requests.get<SatelliteOrbitalElement>(`/satelliteorbitalelement/details/${title}`),
+    gettlestring:(id:string) => requests.get<tlestring>(`/satelliteorbitalelement/gettlestring/${id}`),
+    //
+}
 
 const agent = {
     NORADServerAccess,
+    SatelliteOrbitalElements,
 }
 
 export default agent;

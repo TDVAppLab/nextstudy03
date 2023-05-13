@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import GetDataFromNORADServer from '@/app/GetDataFromNORADServer';
+import GetDataFromNORADServer from '@/services/GetDataFromNORADServer';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 

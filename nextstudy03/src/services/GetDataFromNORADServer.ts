@@ -1,6 +1,6 @@
 import { tlestring } from "@prisma/client";
-import agent from "./agent";
-import prisma from "./prisma";
+import agent from "../app/agent";
+import prisma from "../app/prisma";
 
 export default async function GetDataFromNORADServer(): Promise<void>{
 
