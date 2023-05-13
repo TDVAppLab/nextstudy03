@@ -1,16 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { SatelliteOrbitalElement } from "./models/SatelliteOrbitalElement";
-import { tlestring } from "@prisma/client";
+import { SatelliteOrbitalElement } from "@/app/models/SatelliteOrbitalElement";
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
         setTimeout(resolve, delay)
     })
 }
-
-
-axios.defaults.baseURL = "/api";
-
 
 
 
@@ -30,16 +25,14 @@ const requests = {
     del: <T>(url:string) => axios.delete<T>(url).then(responseBody),
 }
 
-
-const SatelliteOrbitalElements = {
-    list:() => requests.get<tlestring[]>(`/satelliteorbitalelement/index`),
-    details:(title:string) => requests.get<SatelliteOrbitalElement>(`/satelliteorbitalelement/details/${title}`),
-    gettlestring:(id:string) => requests.get<tlestring>(`/satelliteorbitalelement/gettlestring/${id}`),
-    //
+const NORADServerAccess = {
+    activesat2leobjectnamesjson: () => requests.get<SatelliteOrbitalElement[]>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json'),
+    activesat2lestringsraw: () => requests.get<string>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le'),
 }
 
-const agent = {
-    SatelliteOrbitalElements,
+
+const agentinternal = {
+    NORADServerAccess,
 }
 
-export default agent;
+export default agentinternal;

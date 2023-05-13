@@ -1,13 +1,13 @@
 import { tlestring } from "@prisma/client";
-import agent from "../app/agent";
 import prisma from "../app/prisma";
+import agentinternal from "./agentinternal";
 
 export default async function GetDataFromNORADServer(): Promise<void>{
 
     
-    const objectnames = await agent.NORADServerAccess.activesat2leobjectnamesjson();
+    const objectnames = await agentinternal.NORADServerAccess.activesat2leobjectnamesjson();
 
-    const rawstring = await agent.NORADServerAccess.activesat2lestringsraw();
+    const rawstring = await agentinternal.NORADServerAccess.activesat2lestringsraw();
     const lines = rawstring.split('\r\n');
 
 

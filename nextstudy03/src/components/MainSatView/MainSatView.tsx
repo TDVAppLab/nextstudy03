@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 //import GoogleAd from '../../app/common/utils/GoogleAd';
 import { useStore } from '../../app/stores/store';
-//import SatScreen from './SatScreen';
+import SatScreen from './SatScreen';
 import LoadingComponent from '../layout/LoadingComponents';
 
 export default observer(function MainSatView() {      
@@ -32,7 +32,7 @@ export default observer(function MainSatView() {
                 <Col sm={8}>
                     <div style={{height: '50vh', width: '50vw'}} >
                         {
-                        //<SatScreen  isEditmode={false}  isAutoAnimationExec={false}/>
+                        <SatScreen  isEditmode={false}  isAutoAnimationExec={false}/>
                         }
                     </div>
                     {
