@@ -8,6 +8,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<tlestring[]>
 ) {
+  console.log("called api")
     prisma.tlestring.findMany().then((tlestrings) => {
     res.status(200).json(tlestrings)
   })
