@@ -42,6 +42,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  crypted_password String?   @db.VarChar(255)
   image         String?
   accounts      Account[]
   sessions      Session[]
