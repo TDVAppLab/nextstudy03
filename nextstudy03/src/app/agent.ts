@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SatelliteOrbitalElement } from "./models/SatelliteOrbitalElement";
-import { tlestring } from "@prisma/client";
+import { User, tlestring } from "@prisma/client";
+import { UserFormValues } from "./models/user";
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
@@ -12,6 +13,13 @@ const sleep = (delay: number) => {
 axios.defaults.baseURL = "/api";
 
 
+/*
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+    if(token) config.headers!.Authorization = `Bearer ${token}`
+    return config;
+})
+*/
 
 
 axios.interceptors.response.use(async response => {
@@ -38,8 +46,16 @@ const SatelliteOrbitalElements = {
     //
 }
 
+
+const Account = {
+//    current: () => requests.get<User>('/account'),
+//    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/register', user)
+}
+
 const agent = {
     SatelliteOrbitalElements,
+    Account,
 }
 
 export default agent;
