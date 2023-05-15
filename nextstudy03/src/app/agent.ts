@@ -47,6 +47,12 @@ const SatelliteOrbitalElements = {
 }
 
 
+const batchlogs = {
+    //    list:() => requests.get<batchlog[]>(`/batch/index`),
+        getactivesatapi: () => axios.post<void>(`/getactivesatdatabatch`),
+    //    batch01:() => requests.get<>(`/batch/index`),
+    }
+
 const Account = {
 //    current: () => requests.get<User>('/account'),
 //    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -55,6 +61,7 @@ const Account = {
 
 const agent = {
     SatelliteOrbitalElements,
+    batchlogs,
     Account,
 }
 
