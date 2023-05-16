@@ -1,5 +1,6 @@
 //import { observer } from 'mobx-react-lite';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React from 'react';
 //import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown, NavLink } from 'react-bootstrap';
@@ -16,7 +17,7 @@ export default function NavBar() {
             <Container>
                 {
                 //@ts-ignore
-                <Navbar.Brand as={NavLink} to="/">SatelliTrack</Navbar.Brand>
+                <Navbar.Brand as={NavLink} href="/">SatelliTrack</Navbar.Brand>
                 }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -24,22 +25,21 @@ export default function NavBar() {
                         {
                             true && 
                                 <>
-                                    <Nav.Link as={NavLink} to="/modelfiles">Modelfiles</Nav.Link>
-                                    <Nav.Link as={NavLink} to="/attachmentfiles">Attachmentfiles</Nav.Link>
+                                    <Nav.Link as={NavLink} href="/batchlog">Batchlog</Nav.Link>
                                 </>
                         }
                     </Nav>
                     <Nav>
-                        <Nav.Link as={NavLink} to="/privacy">PrivacyPolicy</Nav.Link>                        
+                        <Nav.Link as={NavLink} href="/privacy">PrivacyPolicy</Nav.Link>                        
                         {
                             session ? 
                                 <>
 
                                     <NavDropdown title={session?.user?.email} id="collasible-nav-dropdown-user">
-                                        <NavDropdown.Item as={NavLink} to="/register">register</NavDropdown.Item>
-                                        <NavDropdown.Item as={NavLink} to="/websitesettings">WebsiteSettings</NavDropdown.Item>
-                                        <NavDropdown.Item as={NavLink} to="/batchlog">batchlog</NavDropdown.Item>
-                                        { process.env.NODE_ENV === 'development' &&  <NavDropdown.Item as={NavLink} to="/errors">Errors</NavDropdown.Item>  }     
+                                        <NavDropdown.Item href="/register">register</NavDropdown.Item>
+                                        <NavDropdown.Item href="/websitesettings">WebsiteSettings</NavDropdown.Item>
+                                        <NavDropdown.Item href="/batchlog">batchlog</NavDropdown.Item>
+                                        { process.env.NODE_ENV === 'development' &&  <NavDropdown.Item href="/errors">Errors</NavDropdown.Item>  }     
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={() => signOut()}>signOut</NavDropdown.Item>
                                     </NavDropdown>

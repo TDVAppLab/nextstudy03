@@ -11,15 +11,12 @@ export default async function handler(
   const session = await getSession({ req });
 
   if(session){
-    console.log("start updated from norad server");
     await GetDataFromNORADServer();
-    console.log("data updated");
   
     res.status(200).json(true )
 
   } else {
 
-    console.log("unauthorized");
     res.status(401).json(false )
   }
 }
