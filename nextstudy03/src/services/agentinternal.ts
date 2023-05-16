@@ -1,12 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SatelliteOrbitalElement } from "@/app/models/SatelliteOrbitalElement";
-
-const sleep = (delay: number) => {
-    return new Promise((resolve)=>{
-        setTimeout(resolve, delay)
-    })
-}
-
+import { URL_NORAD_ACTIVESAT_2LE, URL_NORAD_ACTIVESAT_JSON } from "@/app/constants";
 
 
 axios.interceptors.response.use(async response => {
@@ -26,8 +20,8 @@ const requests = {
 }
 
 const NORADServerAccess = {
-    activesat2leobjectnamesjson: () => requests.get<SatelliteOrbitalElement[]>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=json'),
-    activesat2lestringsraw: () => requests.get<string>('https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=2le'),
+    activesat2leobjectnamesjson: () => requests.get<SatelliteOrbitalElement[]>(URL_NORAD_ACTIVESAT_JSON),
+    activesat2lestringsraw: () => requests.get<string>(URL_NORAD_ACTIVESAT_2LE),
 }
 
 

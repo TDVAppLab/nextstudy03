@@ -1,18 +1,43 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SatelliteOrbitalElement } from "./models/SatelliteOrbitalElement";
-import { tlestring } from "@prisma/client";
+import { User, tlestring } from "@prisma/client";
+import { UserFormValues } from "./models/user";
+import { store } from "./stores/store";
 
+/*
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
         setTimeout(resolve, delay)
     })
 }
-
+*/
 
 axios.defaults.baseURL = "/api";
 
 
 
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+
+
+    //console.log("token get on axios config set function with store : " + token)
+
+
+    if(token) config.headers!.Authorization = `Bearer ${token}`
+    return config;
+})
+
+/*
+axios.interceptors.request.use(config => {
+
+    let token : string | null = null;
+    getCsrfToken().then(((t)=>{ if(t){token=t}}));
+    
+    console.log("token get on axios config set function : " + token)
+
+    if(token) config.headers!.Authorization = `Bearer ${token}`
+    return config;
+})*/
 
 axios.interceptors.response.use(async response => {
     return response;
@@ -38,8 +63,23 @@ const SatelliteOrbitalElements = {
     //
 }
 
+
+const batchlogs = {
+    //    list:() => requests.get<batchlog[]>(`/batch/index`),
+        getactivesatapi: () => axios.post<void>(`/getactivesatdatabatch`),
+    //    batch01:() => requests.get<>(`/batch/index`),
+    }
+
+const Account = {
+//    current: () => requests.get<User>('/account'),
+//    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/register', user)
+}
+
 const agent = {
     SatelliteOrbitalElements,
+    batchlogs,
+    Account,
 }
 
 export default agent;

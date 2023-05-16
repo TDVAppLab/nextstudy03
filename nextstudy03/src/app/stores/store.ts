@@ -3,7 +3,7 @@ import CommonStore from "./commonStore";
 import TlestringStore from "./TlestringStore";
 
 interface Store{
-    //commonStore: CommonStore;
+    commonStore: CommonStore;
     //userStore: UserStore;
     //modalStore: ModalStore;
     //siteAnalyticsStore: SiteAnalyticsStore;
@@ -11,7 +11,7 @@ interface Store{
 }
 
 export const store: Store={
-    //commonStore: new CommonStore(),
+    commonStore: new CommonStore(),
     //userStore: new UserStore(),
     //modalStore: new ModalStore(),
     //siteAnalyticsStore: new SiteAnalyticsStore(),    
