@@ -8,9 +8,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<boolean>
 ) {
-  const session = await getSession();
+  const session = await getSession({ req });
 
   if(session){
+    console.log("start updated from norad server");
     await GetDataFromNORADServer();
     console.log("data updated");
   
