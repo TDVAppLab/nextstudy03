@@ -3,7 +3,7 @@ import agentinternal from "./agentinternal";
 import { prisma } from "./prisma";
 
 export default async function GetDataFromNORADServer(): Promise<void>{
-
+    
     
     const objectnames = await agentinternal.NORADServerAccess.activesat2leobjectnamesjson();
 
@@ -24,9 +24,10 @@ export default async function GetDataFromNORADServer(): Promise<void>{
             latest_update_datetime: new Date()
         };
         
-        const setdata = await prisma.tlestring.create({
-            data: {...tle
-            },
+        const setdata = await prisma.tlestring.upsert({
+            where: { noradcatid: tle.noradcatid },
+            update: { ...tle },
+            create: { ...tle }
         });
     }
 
