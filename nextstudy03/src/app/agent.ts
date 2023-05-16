@@ -2,15 +2,15 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { SatelliteOrbitalElement } from "./models/SatelliteOrbitalElement";
 import { User, tlestring } from "@prisma/client";
 import { UserFormValues } from "./models/user";
-import { getCsrfToken } from "next-auth/react";
 import { store } from "./stores/store";
 
+/*
 const sleep = (delay: number) => {
     return new Promise((resolve)=>{
         setTimeout(resolve, delay)
     })
 }
-
+*/
 
 axios.defaults.baseURL = "/api";
 
@@ -18,7 +18,11 @@ axios.defaults.baseURL = "/api";
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
-    console.log("token get on axios config set function with store : " + token)
+
+
+    //console.log("token get on axios config set function with store : " + token)
+
+
     if(token) config.headers!.Authorization = `Bearer ${token}`
     return config;
 })

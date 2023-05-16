@@ -15,12 +15,14 @@ export default function Layout({ children } : Props) {
   
   useEffect(() => {
     if (session) {
-      console.log("successfully sign in session : ");
-      console.log(session);
+      //console.log("successfully sign in session : ");
+      //console.log(session);
       
       getCsrfToken().then((token) => {
-        console.log("token : ");
-        console.log(token);
+        
+        //console.log("token : ");
+        //console.log(token);
+
         if(token){
           commonStore.setToken(token);
         }
