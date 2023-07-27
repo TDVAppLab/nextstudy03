@@ -1,11 +1,6 @@
-//import { observer } from 'mobx-react-lite';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
 import React from 'react';
-//import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown, NavLink } from 'react-bootstrap';
-//import { useStore } from '../stores/store';
-//import { toast } from 'react-toastify';
 
 export default function NavBar() {
 

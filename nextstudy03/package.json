@@ -29,8 +29,6 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "formik": "^2.2.9",
-    "mobx": "^6.9.0",
-    "mobx-react-lite": "^3.4.3",
     "next": "13.4.1",
     "next-auth": "^4.22.1",
     "nodemailer": "^6.9.2",

@@ -1,16 +1,17 @@
 import { Canvas } from '@react-three/fiber';
-import { observer } from 'mobx-react-lite';
 import { OrbitControls } from '@react-three/drei';
 import { Color } from 'three';
 import SimpleEarthPlot from './SimpleEarthPlot';
 import SatPlot from './SatPlot';
+import { tlestring } from '@prisma/client';
 
 interface Props {
   isEditmode : boolean
   isAutoAnimationExec : boolean;
+  tlestrings : tlestring[];
 }
 
-export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: Props) {
+export default function SatScreen({isEditmode, isAutoAnimationExec, tlestrings}: Props) {
 
 
   return (
@@ -56,7 +57,7 @@ export default observer( function SatScreen({isEditmode, isAutoAnimationExec}: P
         }
         <axesHelper position={[-2, -2, -2]} args={[4]} />
         <SimpleEarthPlot />
-        <SatPlot noradcatid={25544}/>
+        <SatPlot noradcatid={25544} tlestrings={tlestrings}/>
       </Canvas>
   );
-});
+};
