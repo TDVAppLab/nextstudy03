@@ -1,5 +1,4 @@
 import { ErrorMessage, Formik } from "formik";
-import { observer } from "mobx-react-lite";
 import React from "react";
 import { Form } from "react-bootstrap";
 import * as Yup from 'yup'
@@ -7,7 +6,7 @@ import TextInputGeneral from "@/components/form/TextInputGeneral";
 import ValidationErrors from "@/components/erros/ValidationErrors";
 import agent from "@/app/agent";
 
-export default observer( function RegisterForm() {
+export default function RegisterForm() {
     
     return (
         <Formik
@@ -42,4 +41,4 @@ export default observer( function RegisterForm() {
                 )}
             </Formik>
     )
-})
+}
