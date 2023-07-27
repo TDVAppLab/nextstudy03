@@ -1,30 +1,27 @@
-import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-//import GoogleAd from '../../app/common/utils/GoogleAd';
-import { useStore } from '../../app/stores/store';
 import SatScreen from './SatScreen';
 import LoadingComponent from '../layout/LoadingComponents';
+import agent from '@/app/agent';
+import { tlestring } from '@prisma/client';
 
-export default observer(function MainSatView() {      
+const defaultNo="56301";
 
+export default function MainSatView() {    
     
-//    const { siteAnalyticsStore } = useStore();
     
-    const { tlestringStore } = useStore();
-    const { loadObjects, setSelectedTlestring, tlestringRegistry } = tlestringStore;
-//    const { userStore: {user}} = useStore();
-  
+    const [tlestrings, setTargetTle ] = useState<tlestring[]>([]);
+
     useEffect(() => {
-        if(tlestringRegistry.size <= 1) {
-          loadObjects();
-          setSelectedTlestring("56301");
-        };
-    },[tlestringRegistry.size, loadObjects])
-  
-  
-    if(tlestringStore.loading) return <LoadingComponent content='Loading objects...' />
 
+        agent.SatelliteOrbitalElements.list().then((tlestrings) => {
+            setTargetTle(tlestrings);
+        });
+
+    },[])
+  
+
+    if(tlestrings.length == 0) return <LoadingComponent content='Loading objects...' />
 
     return(
         <Container>
@@ -32,7 +29,7 @@ export default observer(function MainSatView() {
                 <Col sm={8}>
                     <div style={{height: '50vh', width: '50vw'}} >
                         {
-                        <SatScreen  isEditmode={false}  isAutoAnimationExec={false}/>
+                        <SatScreen  isEditmode={false}  isAutoAnimationExec={false} tlestrings={tlestrings}/>
                         }
                     </div>
                     {
@@ -47,4 +44,4 @@ export default observer(function MainSatView() {
 
         
     )
-})
+}

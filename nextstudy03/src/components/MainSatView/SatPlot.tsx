@@ -1,12 +1,12 @@
 import * as satellite from 'satellite.js';
 import { useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { observer } from 'mobx-react-lite';
-import { useStore } from '@/app/stores/store';
+import { tlestring } from '@prisma/client';
 
 
 interface Props {
     noradcatid: number;
+    tlestrings : tlestring[];
 }
 
 const line1 = () => {return '1 00000U 98067A   21260.38326868  .00002108  00000-0  47329-4 0  9995'};
@@ -15,10 +15,8 @@ const line2 = () => {return '2 00000  51.6436 246.8533 0003182  25.6729 121.4393
 
 
 
-export default observer( function SatPlot ({noradcatid}: Props) {
+export default function SatPlot ({noradcatid, tlestrings}: Props) {
   
-  const { tlestringStore } = useStore();
-  const { selectedTlestring, tlestringRegistry } = tlestringStore;
     
     const [satRec, setSatRec] = useState<satellite.SatRec>(satellite.twoline2satrec(line1(), line2()));
 
@@ -30,10 +28,11 @@ export default observer( function SatPlot ({noradcatid}: Props) {
 
         if(noradcatid) {
 
-          const temp = tlestringRegistry.get(noradcatid.toString());
+          const temp2 = tlestrings.find(x => x.noradcatid === noradcatid);
 
-          if(temp){
-            setSatRec(satellite.twoline2satrec(temp.line1, temp.line2))
+          
+          if(temp2){
+            setSatRec(satellite.twoline2satrec(temp2.line1, temp2.line2))
           }
         }
 
@@ -74,4 +73,4 @@ export default observer( function SatPlot ({noradcatid}: Props) {
         <meshStandardMaterial color="red" />
       </mesh>
     );
-})
+}
